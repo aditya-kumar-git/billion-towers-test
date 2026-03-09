@@ -79,7 +79,7 @@ const SingleProperty = () => {
   };
 
   useEffect(() => {
-    const foundProperty = properties.find(p => p.id == id);
+    const foundProperty = properties.find(p => p.id === id);
     setProperty(foundProperty);
     setLoading(false);
     window.scrollTo(0, 0);
