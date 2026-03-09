@@ -12,7 +12,6 @@ import {
 } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import properties from '../../data/properties';
-import Header from '../layout/Header';
 import Property from '../ui/Property';
 
 const MarketPlace = () => {

@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { ethers } from 'ethers';
 import { motion } from 'framer-motion';
 import {
   ArrowLeft,
-  MapPin,
-  Bed,
   Bath,
-  Square,
-  Calendar,
-  TrendingUp,
-  Users,
-  Star,
-  Share2,
-  Heart,
-  DollarSign,
+  Bed,
   Building2,
-  Shield,
-  CheckCircle
+  Calendar,
+  DollarSign,
+  Heart,
+  MapPin,
+  Share2,
+  Square,
+  TrendingUp,
+  Users
 } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import properties from '../../data/properties';
 import NotFound from './NotFound';
-import { ethers } from 'ethers';
 
 const SingleProperty = () => {
   const [property, setProperty] = useState(null);

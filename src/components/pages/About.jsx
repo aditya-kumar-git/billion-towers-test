@@ -1,20 +1,17 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  Target,
-  Users,
-  Shield,
-  Zap,
-  Globe,
-  TrendingUp,
-  Award,
-  Heart,
   Building2,
+  CheckCircle,
   DollarSign,
-  Lock,
-  CheckCircle
+  Globe,
+  Heart,
+  Shield,
+  Target,
+  TrendingUp,
+  Users,
+  Zap
 } from 'lucide-react';
-import Header from '../layout/Header';
+import React from 'react';
 
 const About = () => {
   const stats = [

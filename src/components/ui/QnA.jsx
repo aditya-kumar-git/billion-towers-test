@@ -1,6 +1,6 @@
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronRight } from 'lucide-react';
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronRight, HelpCircle } from 'lucide-react';
 
 const QnA = ({ n, q }) => {
   const [showAnswer, setShowAnswer] = useState(false);
@@ -34,7 +34,7 @@ const QnA = ({ n, q }) => {
             {q.question}
           </h3>
         </div>
-        
+
         <motion.div
           animate={{ rotate: showAnswer ? 90 : 0 }}
           transition={{ duration: 0.2 }}

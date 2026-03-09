@@ -1,7 +1,7 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import { Eye, Heart, MapPin, Share2, TrendingUp, Users } from 'lucide-react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { TrendingUp, Users, MapPin, Star, Eye, Heart, Share2 } from 'lucide-react';
 
 const Property = ({ currentEthPrice, priceIncreased, property, propertyIndex }) => {
   if (!property) return null;

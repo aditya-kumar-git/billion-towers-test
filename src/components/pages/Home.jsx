@@ -1,37 +1,28 @@
-import React, { useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import {
   ArrowRight,
-  TrendingUp,
-  Shield,
-  Zap,
-  Star,
   Building2,
   DollarSign,
-  Users,
-  CheckCircle,
-  Play,
-  Wallet,
   Home as HomeIcon,
-  TrendingDown,
+  Lock,
+  Play,
+  Shield,
   ShoppingCart,
   Sparkles,
   Target,
-  Lock,
-  Globe
+  TrendingDown,
+  TrendingUp,
+  Users,
+  Wallet,
+  Zap
 } from 'lucide-react';
-import Header from '../layout/Header';
+import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import Property from '../ui/Property';
 import QnA from '../ui/QnA';
-import Logo from '../ui/Logo';
 
 // Import images
 import vrmobile from '../../assets/images/vrmobile.png';
-import connect_wallet from '../../assets/images/connect_wallet.png';
-import home1 from '../../assets/images/home.jpg';
-import trading from '../../assets/images/trading.jpg';
-import sellhome from '../../assets/images/sellhome.jpg';
 
 // Import data
 import faq from '../../data/faq';

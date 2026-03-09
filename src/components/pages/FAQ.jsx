@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search, HelpCircle, ChevronDown, ChevronRight } from 'lucide-react';
-import QnA from '../ui/QnA';
+import { HelpCircle, Search } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 import faq from '../../data/faq';
+import QnA from '../ui/QnA';
 
 const FAQ = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -13,7 +13,7 @@ const FAQ = () => {
     window.scrollTo(0, 0);
   }, []);
 
-    useEffect(() => {
+  useEffect(() => {
     let filtered = faq;
 
     if (searchTerm) {

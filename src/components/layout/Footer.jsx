@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { 
-  Facebook, 
-  Instagram, 
-  Twitter, 
-  Linkedin, 
-  Github, 
-  Mail, 
-  Phone, 
-  MapPin, 
+import {
   ArrowUp,
-  Zap,
+  Facebook,
+  Github,
+  Heart,
+  Instagram,
+  Linkedin,
+  Mail,
   Shield,
-  Globe,
-  Heart
+  Twitter,
+  Zap
 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Logo from '../ui/Logo';
 
 const Footer = () => {
@@ -99,7 +96,7 @@ const Footer = () => {
                   </div>
                 </div>
                 <p className="text-white/60 mb-6 leading-relaxed">
-                  Revolutionizing real estate investment through blockchain technology. 
+                  Revolutionizing real estate investment through blockchain technology.
                   Start investing from just $10 and build your wealth portfolio.
                 </p>
               </motion.div>
@@ -171,9 +168,9 @@ const Footer = () => {
             <motion.div
               className="flex items-center space-x-2 text-white/60"
               initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
             >
               <span>© 2024 Billion Towers. All rights reserved.</span>
               <Heart className="w-4 h-4 text-neon-pink" />
@@ -227,7 +224,7 @@ const Footer = () => {
           <Zap className="w-8 h-8 text-neon-blue" />
         </motion.div>
       </div>
-      
+
       <div className="absolute bottom-10 left-10 opacity-20">
         <motion.div
           animate={{ y: -10 }}
