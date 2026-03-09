@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  ArrowLeft, 
-  MapPin, 
-  Bed, 
-  Bath, 
-  Square, 
-  Calendar, 
-  TrendingUp, 
-  Users, 
+import {
+  ArrowLeft,
+  MapPin,
+  Bed,
+  Bath,
+  Square,
+  Calendar,
+  TrendingUp,
+  Users,
   Star,
   Share2,
   Heart,
@@ -20,11 +20,66 @@ import {
 } from 'lucide-react';
 import properties from '../../data/properties';
 import NotFound from './NotFound';
+import { ethers } from 'ethers';
 
 const SingleProperty = () => {
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
+
+  useEffect(() => {
+    if (window.ethereum) {
+      if (window.ethereum) {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        provider.listAccounts().then((accounts) => {
+          if (accounts && accounts.length > 0) {
+            setIsWalletConnected(true);
+          } else {
+            console.log("Wallet not connected");
+          }
+        }).catch((err) => {
+          console.error('Error checking wallet connection:', err);
+        });
+      }
+    }
+  }, []);
+
+  const handleBuyNow = async () => {
+    if (!window.ethereum) {
+      alert("Please install MetaMask to proceed with the transaction.");
+      return;
+    }
+    if (!isWalletConnected) {
+      alert("Connect your wallet to invest.");
+      return;
+    }
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const recipient = "0x7d586D787C8dC7E8A81d334e5BBB76BfC8AE57BC";
+    // Get ETH/USD rate from price object, fallback to 2000
+    const usdPerEth = typeof property?.price?.usd === "number" && typeof property?.price?.eth === "number"
+      ? property.price.usd / property.price.eth
+      : 2000;
+    const amountInEth = 0.1 / usdPerEth; // $10 in ETH
+
+    try {
+      // Will trigger MetaMask with $10 (in ETH) filled in to send to recipient
+      const tx = {
+        to: recipient,
+        value: ethers.utils.parseEther(amountInEth.toFixed(8)), // to avoid rounding issues, keep 8 decimals
+      };
+      await signer.sendTransaction(tx)
+        .then((transaction) => {
+          alert("Transaction submitted! Hash: " + transaction.hash);
+        })
+        .catch((err) => {
+          alert("Transaction failed: " + err.message);
+        });
+    } catch (error) {
+      alert("Error initiating transaction: " + error.message);
+    }
+  };
 
   useEffect(() => {
     const foundProperty = properties.find(p => p.id == id);
@@ -34,19 +89,21 @@ const SingleProperty = () => {
   }, [id]);
 
   if (loading) {
-  return (
+    return (
       <div className="min-h-screen bg-gradient-to-br from-secondary-50 via-primary-50 to-accent-50 flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-secondary-600">Loading property details...</p>
-            </div>
-          </div>
+        </div>
+      </div>
     );
   }
 
   if (!property) {
     return <NotFound />;
   }
+
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-secondary-50 via-primary-50 to-accent-50">
@@ -177,6 +234,7 @@ const SingleProperty = () => {
                   className="btn btn-primary w-full text-lg py-4"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
+                  onClick={handleBuyNow}
                 >
                   <DollarSign className="w-5 h-5 mr-2" />
                   Invest Now

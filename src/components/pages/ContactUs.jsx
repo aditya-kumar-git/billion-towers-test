@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Send, 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
   MessageSquare,
   Clock,
   Globe,
@@ -85,10 +85,9 @@ const ContactUs = () => {
     }
   };
 
-    return (
+  return (
     <div className="min-h-screen bg-dark-gradient relative overflow-hidden">
-      <Header />
-      
+
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-72 h-72 bg-neon-blue/10 rounded-full blur-3xl animate-pulse"></div>
@@ -111,12 +110,12 @@ const ContactUs = () => {
             >
               Get in <span className="gradient-text">Touch</span>
             </motion.h1>
-            
+
             <motion.p
               className="text-xl sm:text-2xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed"
               variants={itemVariants}
             >
-              Have questions about our platform? Need help with your investments? 
+              Have questions about our platform? Need help with your investments?
               We're here to help you succeed in your real estate investment journey.
             </motion.p>
           </div>
@@ -148,11 +147,11 @@ const ContactUs = () => {
                 >
                   <info.icon className={`w-8 h-8 ${info.color}`} />
                 </motion.div>
-                
+
                 <h3 className="text-xl font-semibold text-white mb-4">
                   {info.title}
                 </h3>
-                
+
                 <div className="space-y-2">
                   {info.details.map((detail, idx) => (
                     <p key={idx} className="text-white/60 text-sm">
@@ -160,7 +159,7 @@ const ContactUs = () => {
                     </p>
                   ))}
                 </div>
-                
+
                 {/* Hover Glow */}
                 <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/5 to-neon-purple/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </motion.div>
@@ -187,7 +186,7 @@ const ContactUs = () => {
               <h2 className="text-3xl font-display font-bold text-white mb-6">
                 Send us a <span className="gradient-text">Message</span>
               </h2>
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -202,7 +201,7 @@ const ContactUs = () => {
                       placeholder="Your full name"
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-white/80 text-sm mb-2">Email</label>
                     <input
@@ -216,7 +215,7 @@ const ContactUs = () => {
                     />
                   </div>
                 </div>
-                
+
                 <div>
                   <label className="block text-white/80 text-sm mb-2">Subject</label>
                   <input
@@ -229,7 +228,7 @@ const ContactUs = () => {
                     placeholder="What's this about?"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-white/80 text-sm mb-2">Message</label>
                   <textarea
@@ -252,7 +251,7 @@ const ContactUs = () => {
                   <Send className="w-5 h-5" />
                   <span>Send Message</span>
                 </motion.button>
-                            </form>
+              </form>
             </motion.div>
 
             {/* Additional Info */}
@@ -291,12 +290,12 @@ const ContactUs = () => {
                   <div className="flex justify-between items-center">
                     <span className="text-white/80">Phone Support</span>
                     <span className="text-neon-green font-semibold">Immediate</span>
-                        </div>
+                  </div>
                   <div className="flex justify-between items-center">
                     <span className="text-white/80">Live Chat</span>
                     <span className="text-neon-green font-semibold">Within 5 minutes</span>
-                            </div>
-                        </div>
+                  </div>
+                </div>
               </div>
 
               <div className="bg-dark-800/50 backdrop-blur-sm rounded-2xl p-8 border border-neon-pink/20">
@@ -334,7 +333,7 @@ const ContactUs = () => {
           <Zap className="w-8 h-8 text-neon-blue" />
         </motion.div>
       </div>
-      
+
       <div className="absolute bottom-20 left-20 opacity-20">
         <motion.div
           animate={{ y: -10 }}
@@ -342,8 +341,8 @@ const ContactUs = () => {
         >
           <Shield className="w-8 h-8 text-neon-purple" />
         </motion.div>
-                    </div>
-                </div>
+      </div>
+    </div>
   );
 };
 

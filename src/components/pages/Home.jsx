@@ -142,7 +142,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-dark-gradient relative overflow-hidden">
-      <Header />
 
       {/* Hero Section */}
       <motion.section

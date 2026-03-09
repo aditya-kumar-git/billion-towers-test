@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Target, 
-  Users, 
-  Shield, 
-  Zap, 
-  Globe, 
-  TrendingUp, 
-  Award, 
+import {
+  Target,
+  Users,
+  Shield,
+  Zap,
+  Globe,
+  TrendingUp,
+  Award,
   Heart,
   Building2,
   DollarSign,
@@ -101,10 +101,9 @@ const About = () => {
     }
   };
 
-    return (
+  return (
     <div className="min-h-screen bg-dark-gradient relative overflow-hidden">
-      <Header />
-      
+
       {/* Hero Section */}
       <motion.section
         className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative"
@@ -116,7 +115,7 @@ const About = () => {
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-neon-blue/10 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute top-40 right-20 w-96 h-96 bg-neon-purple/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-                    </div>
+        </div>
 
         <div className="container mx-auto max-w-7xl relative z-10">
           <div className="text-center">
@@ -126,13 +125,13 @@ const About = () => {
             >
               About <span className="gradient-text">Billion Towers</span>
             </motion.h1>
-            
+
             <motion.p
               className="text-xl sm:text-2xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed"
               variants={itemVariants}
             >
-              We're revolutionizing real estate investment by making it accessible, 
-              transparent, and profitable for everyone. Our platform combines cutting-edge 
+              We're revolutionizing real estate investment by making it accessible,
+              transparent, and profitable for everyone. Our platform combines cutting-edge
               blockchain technology with traditional real estate expertise.
             </motion.p>
           </div>
@@ -195,7 +194,7 @@ const About = () => {
                 Our <span className="gradient-text">Mission</span>
               </h2>
               <p className="text-xl text-white/80 mb-8 leading-relaxed">
-                To democratize real estate investment by breaking down barriers and making 
+                To democratize real estate investment by breaking down barriers and making
                 property ownership accessible to everyone, regardless of their financial status.
               </p>
               <div className="space-y-4">
@@ -231,9 +230,9 @@ const About = () => {
                   <Target className="w-16 h-16 text-neon-blue mx-auto mb-6" />
                   <h3 className="text-2xl font-semibold text-white mb-4">Our Vision</h3>
                   <p className="text-white/80 leading-relaxed">
-                    A world where everyone can build wealth through real estate investment, 
+                    A world where everyone can build wealth through real estate investment,
                     creating a more equitable and prosperous society.
-                    </p>
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -278,14 +277,14 @@ const About = () => {
                 >
                   <value.icon className="w-8 h-8 text-dark-900" />
                 </motion.div>
-                
+
                 <h3 className="text-xl font-semibold text-white mb-3">
                   {value.title}
                 </h3>
                 <p className="text-white/60">
                   {value.description}
                 </p>
-                
+
                 {/* Hover Glow */}
                 <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/5 to-neon-purple/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </motion.div>
@@ -311,7 +310,7 @@ const About = () => {
               Meet Our <span className="gradient-text">Team</span>
             </h2>
             <p className="text-xl text-white/80 max-w-3xl mx-auto">
-              The brilliant minds behind Billion Towers, combining decades of experience 
+              The brilliant minds behind Billion Towers, combining decades of experience
               in real estate, technology, and finance.
             </p>
           </motion.div>
@@ -332,7 +331,7 @@ const About = () => {
                     className="w-24 h-24 mx-auto rounded-full object-cover border-2 border-neon-blue/30 group-hover:border-neon-blue/60 transition-colors duration-300"
                   />
                   <div className="absolute -inset-1 bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
+                </div>
 
                 <h3 className="text-xl font-semibold text-white mb-1">
                   {member.name}
@@ -343,7 +342,7 @@ const About = () => {
                 <p className="text-white/60 text-sm">
                   {member.description}
                 </p>
-                
+
                 {/* Hover Glow */}
                 <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/5 to-neon-purple/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </motion.div>
@@ -371,7 +370,7 @@ const About = () => {
                 Ready to Start <span className="gradient-text">Investing?</span>
               </h2>
               <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-                Join thousands of investors who are already building wealth through 
+                Join thousands of investors who are already building wealth through
                 our innovative real estate investment platform.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -389,8 +388,8 @@ const About = () => {
                 >
                   Learn More
                 </motion.button>
-                    </div>
-                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </motion.section>

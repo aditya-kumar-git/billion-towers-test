@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, User, Bell, Search, Wallet, Zap, Shield, TrendingUp } from 'lucide-react';
+import { Menu, X, User, Bell, Search, Wallet, Zap, Shield, TrendingUp, Loader } from 'lucide-react';
 import Logo from '../ui/Logo';
+import { ethers } from 'ethers';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,13 +63,64 @@ const Header = () => {
     }
   };
 
+  const [connectedWalletAddress, setConnectedWalletAddress] = useState(null);
+  const [isConnecting, setIsConnecting] = useState(false);
+
+  const handleConnect = async () => {
+    setIsConnecting(true);
+    if (window.ethereum) {
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const accounts = await provider.send('eth_requestAccounts', []);
+        if (accounts && accounts.length > 0) {
+          const selectedAccount = accounts[0];
+          console.log("Selected account ", selectedAccount);
+          setConnectedWalletAddress(selectedAccount);
+        }
+      } catch (error) {
+        console.error('User denied account access', error);
+      } finally {
+        setIsConnecting(false);
+      }
+    } else {
+      alert('Please install MetaMask');
+      setIsConnecting(false);
+      return;
+    }
+  };
+
+  const handleDisconnect = async () => {
+    if (window.ethereum) {
+      try {
+        setConnectedWalletAddress(null);
+      } catch (error) {
+        console.error('Error disconnecting wallet', error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (window.ethereum) {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      provider.listAccounts().then((accounts) => {
+        if (accounts && accounts.length > 0) {
+          console.log("Wallet already connected:", accounts[0]);
+          setConnectedWalletAddress(accounts[0]);
+        } else {
+          console.log("Wallet not connected");
+        }
+      }).catch((err) => {
+        console.error('Error checking wallet connection:', err);
+      });
+    }
+
+  }, []);
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-dark-900/95 backdrop-blur-lg border-b border-neon-blue/20' 
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ? 'bg-dark-900/95 backdrop-blur-lg border-b border-neon-blue/20'
+        : 'bg-transparent'
+        }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -107,11 +159,10 @@ const Header = () => {
                 >
                   <Link
                     to={item.href}
-                    className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
-                      isActive
-                        ? 'text-neon-blue bg-neon-blue/10'
-                        : 'text-white/80 hover:text-neon-blue hover:bg-neon-blue/5'
-                    }`}
+                    className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 ${isActive
+                      ? 'text-neon-blue bg-neon-blue/10'
+                      : 'text-white/80 hover:text-neon-blue hover:bg-neon-blue/5'
+                      }`}
                   >
                     <div className="flex items-center space-x-2">
                       <item.icon className="w-4 h-4" />
@@ -135,7 +186,7 @@ const Header = () => {
             >
               <Search className="w-5 h-5" />
             </motion.button>
-            
+
             <motion.button
               className="p-2 text-white/80 hover:text-neon-blue transition-colors relative"
               whileHover={{ scale: 1.1 }}
@@ -144,15 +195,29 @@ const Header = () => {
               <Bell className="w-5 h-5" />
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-neon-pink rounded-full animate-pulse"></span>
             </motion.button>
+            {
+              connectedWalletAddress ?
+                <motion.button
+                  className="btn btn-neon flex items-center space-x-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleDisconnect}
+                >
+                  <Wallet className="w-4 h-4" />
+                  <span className='min-w-20 flex items-center justify-center' >{connectedWalletAddress.slice(0, 6)}...{connectedWalletAddress.slice(-4)}</span>
+                </motion.button> : <motion.button
+                  className="btn btn-neon flex items-center space-x-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleConnect}
+                >
+                  <Wallet className="w-4 h-4" />
+                  <span className='min-w-20 flex items-center justify-center' >
+                    {isConnecting ? <Loader className="animate-spin" /> : 'Connect Wallet'}
+                  </span>
+                </motion.button>
+            }
 
-            <motion.button
-              className="btn btn-neon flex items-center space-x-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Wallet className="w-4 h-4" />
-              <span>Connect Wallet</span>
-            </motion.button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -186,11 +251,10 @@ const Header = () => {
                     >
                       <Link
                         to={item.href}
-                        className={`flex items-center space-x-3 px-4 py-3 rounded-lg font-medium transition-all duration-300 relative ${
-                          isActive
-                            ? 'text-neon-blue bg-neon-blue/10'
-                            : 'text-white/80 hover:text-neon-blue hover:bg-neon-blue/5'
-                        }`}
+                        className={`flex items-center space-x-3 px-4 py-3 rounded-lg font-medium transition-all duration-300 relative ${isActive
+                          ? 'text-neon-blue bg-neon-blue/10'
+                          : 'text-white/80 hover:text-neon-blue hover:bg-neon-blue/5'
+                          }`}
                         onClick={() => setIsMenuOpen(false)}
                       >
                         <item.icon className="w-5 h-5" />
@@ -202,7 +266,7 @@ const Header = () => {
                     </motion.div>
                   );
                 })}
-                
+
                 <motion.div
                   className="pt-4 border-t border-dark-600/50"
                   variants={itemVariants}
@@ -216,7 +280,7 @@ const Header = () => {
                       <Search className="w-5 h-5" />
                       <span>Search</span>
                     </motion.button>
-                    
+
                     <motion.button
                       className="flex items-center space-x-3 px-4 py-3 text-white/80 hover:text-neon-blue hover:bg-neon-blue/5 rounded-lg transition-all duration-300"
                       whileHover={{ scale: 1.01 }}
@@ -225,15 +289,29 @@ const Header = () => {
                       <Bell className="w-5 h-5" />
                       <span>Notifications</span>
                     </motion.button>
-                    
-                    <motion.button
-                      className="btn btn-neon w-full justify-center mt-2"
-                      whileHover={{ scale: 1.01 }}
-                      whileTap={{ scale: 0.99 }}
-                    >
-                      <Wallet className="w-4 h-4" />
-                      <span>Connect Wallet</span>
-                    </motion.button>
+
+                    {
+                      connectedWalletAddress ?
+                        <motion.button
+                          className="btn btn-neon flex items-center space-x-2"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={handleDisconnect}
+                        >
+                          <Wallet className="w-4 h-4" />
+                          <span className='min-w-20 flex items-center justify-center' >{connectedWalletAddress.slice(0, 6)}...{connectedWalletAddress.slice(-4)}</span>
+                        </motion.button> : <motion.button
+                          className="btn btn-neon flex items-center space-x-2"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={handleConnect}
+                        >
+                          <Wallet className="w-4 h-4" />
+                          <span className='min-w-20 flex items-center justify-center' >
+                            {isConnecting ? <Loader className="animate-spin" /> : 'Connect Wallet'}
+                          </span>
+                        </motion.button>
+                    }
                   </div>
                 </motion.div>
               </div>
