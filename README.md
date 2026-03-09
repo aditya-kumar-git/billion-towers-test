@@ -1,37 +1,18 @@
 ## Billion Towers - Project Proposal
 
-**1. Introduction**
+**1. What I implemented:**
 
-Billion Towers is a proposed responsive real estate platform built with ReactJS, aiming to revolutionize the property market by leveraging emerging technologies like AR/VR and Web3.  This document outlines the project's core features, technical approach, and future roadmap.
+* The first card on the Marketplace now displays the price of 300 ETH, while the rest of the cards remain unchanged.
+* Added the current ETH price at the top of the cards.
+* Implemented a 10-second auto-update to fetch the latest ETH price (also added console logs since sometimes the price stays the same for a while and it can look like nothing is updating).
+* All cards now convert and display their price based on the current ETH value and ETH/USD price.
+* The first card changes background color based on price movement:
+* Green when the price increases
+* Red when the price decreases
+* Other cards update the price as ETH changes but do not change background color.
 
-**2. Key Features**
-
-* **Property Listing:**  Detailed listings with high-quality images, videos, and 3D models (AR/VR integration).
-* **AR/VR Property Tours:** Users can virtually explore properties using their devices, creating an immersive experience.
-* **Advanced Search Filters:** Customizable filters based on location, price range, size, amenities, and more.
-* **Secure Transactions:** Blockchain integration for secure and transparent transactions, minimizing fraud and delays.
-* **User Profiles:** Secure user accounts with personalized dashboards, saved searches, and transaction history.
-* **Real Estate Agent Portal:** Dedicated portal for agents to manage listings, communications, and client interactions.
-* **Payment Gateway Integration:** Secure and reliable payment processing through established gateways.
-* **Community Forum:** A platform for users and agents to connect, share information, and engage in discussions.
-* **NFT Integration (Optional):**  Potentially allowing users to own and trade digital representations of properties as NFTs.
-* **Property Management Tools (Optional):**  Integration with property management systems for streamlined management.
-
-**3. Conclusion**
-
-Billion Towers has the potential to redefine the real estate market by offering a seamless, secure, and technologically advanced platform.  By focusing on user experience, security, and innovation, Billion Towers aims to become the leading digital real estate marketplace in the future.  Further detailed planning, including a more specific technical architecture, budgeting, and team structure, is necessary for project commencement.
-
-## How to build on your side?
-
-
-### Install dependencies ( v18.x / v20.x )
-
-```
-   npm install
-```
-
-### Run on localhost
-
-```
-   npm start
-```
+**2. Extra (Web3 integration showcase):**
+* Implemented wallet connection — clicking Connect Wallet opens MetaMask (or any installed browser wallet).
+* Once connected, the wallet address appears in the header instead of the connect button.
+* On the Market Details page, clicking Invest Now opens MetaMask with a pre-initiated transaction that the user can approve.
+* Added these extras mainly to demonstrate a bit of Web3 integration alongside the task.
