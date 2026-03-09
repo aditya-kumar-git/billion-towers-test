@@ -1,35 +1,73 @@
-import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Search, 
-  Filter, 
-  Grid, 
-  List, 
-  TrendingUp, 
-  TrendingDown, 
-  Star,
-  MapPin,
-  DollarSign,
-  Building2,
-  Users,
-  Calendar,
+import {
   ArrowUpDown,
-  Zap,
-  Shield,
-  Target
+  Building2,
+  DollarSign,
+  Grid,
+  List,
+  Search,
+  Star,
+  TrendingUp,
+  Users
 } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import properties from '../../data/properties';
 import Header from '../layout/Header';
 import Property from '../ui/Property';
-import properties from '../../data/properties';
 
 const MarketPlace = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('price');
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortOrder, setSortOrder] = useState('desc');
   const [viewMode, setViewMode] = useState('grid');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [filteredProperties, setFilteredProperties] = useState(properties);
+  const [currentEthPrice, setCurrentEthPrice] = useState(1);
+  const [priceIncreased, setPriceIncreased] = useState(undefined);
+
+  const lastEthPriceRef = useRef(1);
+
+  useEffect(() => {
+    let callLoop;
+
+    const fetchEthPrice = async () => {
+      try {
+        const response = await fetch(
+          'https://api.etherscan.io/v2/api?chainid=1&module=stats&action=ethprice&apikey=CMHBV2S9VC392CS3M39Z4HKZCZA948RPFA'
+        );
+        const data = await response.json();
+
+        if (data?.result?.ethusd) {
+          const newPrice = Number(data.result.ethusd);
+
+          console.log("--------------------------------");
+          console.log("old eth price:", lastEthPriceRef.current);
+          console.log("new eth price:", newPrice);
+
+          if (lastEthPriceRef.current !== 1) {
+            if (newPrice > lastEthPriceRef.current) {
+              setPriceIncreased(true);
+            } else if (newPrice < lastEthPriceRef.current) {
+              setPriceIncreased(false);
+            }
+          }
+
+          setCurrentEthPrice(newPrice);
+          lastEthPriceRef.current = newPrice;
+        }
+      } catch (error) {
+        console.error("Failed to fetch Ethereum price:", error);
+        setCurrentEthPrice(1);
+        lastEthPriceRef.current = 1;
+      }
+    };
+
+    fetchEthPrice();
+    callLoop = setInterval(fetchEthPrice, 10000);
+
+    return () => clearInterval(callLoop);
+  }, []);
 
   const categories = [
     { value: 'all', label: 'All Properties', icon: Building2 },
@@ -64,14 +102,14 @@ const MarketPlace = () => {
     }
 
     // Price range filter
-    filtered = filtered.filter(property => 
+    filtered = filtered.filter(property =>
       property.price >= priceRange[0] && property.price <= priceRange[1]
     );
 
     // Sort
     filtered.sort((a, b) => {
       let aValue, bValue;
-      
+
       switch (sortBy) {
         case 'price':
           aValue = a.price;
@@ -127,10 +165,10 @@ const MarketPlace = () => {
     }
   };
 
-    return (
+  return (
     <div className="min-h-screen bg-dark-gradient relative overflow-hidden">
       <Header />
-      
+
       {/* Hero Section */}
       <motion.section
         className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 relative"
@@ -152,12 +190,12 @@ const MarketPlace = () => {
             >
               Property <span className="gradient-text">Marketplace</span>
             </motion.h1>
-            
+
             <motion.p
               className="text-xl sm:text-2xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed"
               variants={itemVariants}
             >
-              Discover and invest in premium real estate properties from around the world. 
+              Discover and invest in premium real estate properties from around the world.
               Start building your portfolio today.
             </motion.p>
           </div>
@@ -268,7 +306,7 @@ const MarketPlace = () => {
                   <List className="w-5 h-5" />
                 </motion.button>
               </div>
-              
+
               <div className="text-white/60 text-sm">
                 {filteredProperties.length} properties found
               </div>
@@ -285,15 +323,18 @@ const MarketPlace = () => {
         animate="visible"
       >
         <div className="container mx-auto max-w-7xl">
+          <div className="text-white/60 text-sm mb-4">
+            ETH Price: ${currentEthPrice}
+          </div>
           {filteredProperties.length > 0 ? (
             <motion.div
-              className={`grid gap-8 ${
-                viewMode === 'grid' 
-                  ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
-                  : 'grid-cols-1'
-              }`}
+              className={`grid gap-8 ${viewMode === 'grid'
+                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+                : 'grid-cols-1'
+                }`}
               variants={containerVariants}
             >
+
               {filteredProperties.map((property, index) => (
                 <motion.div
                   key={property.id}
@@ -301,7 +342,7 @@ const MarketPlace = () => {
                   whileHover={{ y: -5 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Property property={property} />
+                  <Property propertyIndex={index} currentEthPrice={currentEthPrice} priceIncreased={priceIncreased} property={property} />
                 </motion.div>
               ))}
             </motion.div>
@@ -381,9 +422,9 @@ const MarketPlace = () => {
                   </div>
                 </motion.div>
               ))}
-                  </div>
-                  </div>
-                </div>
+            </div>
+          </div>
+        </div>
       </motion.section>
     </div>
   );

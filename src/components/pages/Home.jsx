@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, 
-  TrendingUp, 
-  Shield, 
-  Zap, 
+import {
+  ArrowRight,
+  TrendingUp,
+  Shield,
+  Zap,
   Star,
   Building2,
   DollarSign,
@@ -140,10 +140,10 @@ const Home = () => {
     }
   };
 
-    return (
+  return (
     <div className="min-h-screen bg-dark-gradient relative overflow-hidden">
-            <Header />
-      
+      <Header />
+
       {/* Hero Section */}
       <motion.section
         ref={heroRef}
@@ -178,12 +178,12 @@ const Home = () => {
                 From $10
               </span>
             </motion.h1>
-            
+
             <motion.p
               className="text-xl sm:text-2xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed"
               variants={itemVariants}
             >
-              Our revolutionary platform allows everyone to build wealth through real estate investment. 
+              Our revolutionary platform allows everyone to build wealth through real estate investment.
               <span className="text-neon-blue"> Start with just $10</span> and watch your portfolio grow.
             </motion.p>
 
@@ -199,7 +199,7 @@ const Home = () => {
                 <span>Start Investing</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </motion.button>
-              
+
               <motion.button
                 className="btn btn-neon text-lg px-8 py-4 flex items-center space-x-3 group"
                 whileHover={{ scale: 1.05 }}
@@ -291,16 +291,16 @@ const Home = () => {
                     <step.icon className={`w-10 h-10 ${step.color}`} />
                     <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 to-neon-purple/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </motion.div>
-                  
+
                   {/* Step Number */}
                   <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-neon-blue to-neon-purple text-dark-900 rounded-full flex items-center justify-center text-sm font-bold">
                     {index + 1}
-              </div>
-                  
+                  </div>
+
                   {/* Glow Effect */}
                   <div className="absolute -inset-2 bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-                
+                </div>
+
                 <h3 className="text-xl font-semibold text-white mb-2">
                   {step.title}
                 </h3>
@@ -309,8 +309,8 @@ const Home = () => {
                 </p>
               </motion.div>
             ))}
-              </div>
-            </div>
+          </div>
+        </div>
       </motion.section>
 
       {/* Features Section */}
@@ -331,8 +331,8 @@ const Home = () => {
             </h2>
             <p className="text-xl text-white/80 max-w-4xl mx-auto">
               Our unique solution allows everyone to build up their own assets, from as little as $10.
-                Investing your savings is finally simple and really rewarding.
-              </p>
+              Investing your savings is finally simple and really rewarding.
+            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -351,20 +351,20 @@ const Home = () => {
                 >
                   <feature.icon className={`w-8 h-8 ${feature.color}`} />
                 </motion.div>
-                
+
                 <h3 className="text-xl font-semibold text-white mb-3">
                   {feature.title}
                 </h3>
                 <p className="text-white/60">
                   {feature.description}
                 </p>
-                
+
                 {/* Hover Glow */}
                 <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/5 to-neon-purple/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </motion.div>
             ))}
-              </div>
-            </div>
+          </div>
+        </div>
       </motion.section>
 
       {/* How Billion Towers Works */}
@@ -427,15 +427,15 @@ const Home = () => {
                       {item.number}
                     </div>
                     <div className={`absolute inset-0 bg-gradient-to-r ${item.color} rounded-2xl blur opacity-50 group-hover:opacity-100 transition-opacity duration-300`}></div>
-            </div>
+                  </div>
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold text-white mb-2">
                       {item.title}
-                </h3>
+                    </h3>
                     <p className="text-white/60">
                       {item.description}
                     </p>
-              </div>
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
@@ -453,7 +453,7 @@ const Home = () => {
                   className="w-full max-w-md mx-auto rounded-2xl border border-neon-blue/20"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-neon-blue/20 to-transparent rounded-2xl"></div>
-                
+
                 {/* Floating Elements */}
                 <motion.div
                   className="absolute top-4 right-4 w-12 h-12 bg-neon-blue/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-neon-blue/30"
@@ -462,7 +462,7 @@ const Home = () => {
                 >
                   <Target className="w-6 h-6 text-neon-blue" />
                 </motion.div>
-                
+
                 <motion.div
                   className="absolute bottom-4 left-4 w-12 h-12 bg-neon-purple/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-neon-purple/30"
                   animate={{ y: 10 }}
@@ -472,8 +472,8 @@ const Home = () => {
                 </motion.div>
               </div>
             </motion.div>
-            </div>
-            </div>
+          </div>
+        </div>
       </motion.section>
 
       {/* Properties Section */}
@@ -516,7 +516,7 @@ const Home = () => {
               </motion.div>
             ))}
           </motion.div>
-            </div>
+        </div>
       </motion.section>
 
       {/* FAQ Section */}
@@ -555,7 +555,7 @@ const Home = () => {
           </motion.div>
         </div>
       </motion.section>
-            </div>
+    </div>
   );
 };
 

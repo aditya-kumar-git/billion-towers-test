@@ -3,12 +3,13 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { TrendingUp, Users, MapPin, Star, Eye, Heart, Share2 } from 'lucide-react';
 
-const Property = ({ property }) => {
+const Property = ({ currentEthPrice, priceIncreased, property, propertyIndex }) => {
   if (!property) return null;
+
 
   return (
     <motion.div
-      className="card-glow overflow-hidden group relative"
+      className={`card-glow overflow-hidden group relative ${propertyIndex !== 0 ? "bg-dark-800/50" : priceIncreased === undefined ? "bg-dark-800/50" : priceIncreased ? 'bg-green-500/80' : 'bg-red-500/80'}`}
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3 }}
     >
@@ -19,10 +20,10 @@ const Property = ({ property }) => {
           alt={property.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        
+
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-transparent"></div>
-        
+
         {/* Status Badges */}
         <div className="absolute top-4 right-4 flex flex-col space-y-2">
           <div className="bg-neon-green/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-dark-900">
@@ -34,7 +35,7 @@ const Property = ({ property }) => {
             </div>
           )}
         </div>
-        
+
         {/* Action Buttons */}
         <div className="absolute top-4 left-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <motion.button
@@ -52,7 +53,7 @@ const Property = ({ property }) => {
             <Share2 className="w-4 h-4" />
           </motion.button>
         </div>
-        
+
         {/* View Count */}
         <div className="absolute bottom-4 left-4 flex items-center space-x-1 text-white/80 text-sm">
           <Eye className="w-4 h-4" />
@@ -71,7 +72,7 @@ const Property = ({ property }) => {
               {property.price} ETH
             </div>
             <div className="text-sm text-white/60">
-              ${(property.price * 2000).toLocaleString()}
+              ${(property.price * currentEthPrice).toLocaleString()}
             </div>
           </div>
         </div>
@@ -154,7 +155,7 @@ const Property = ({ property }) => {
           </motion.span>
         </Link>
       </div>
-      
+
       {/* Hover Glow Effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/5 to-neon-purple/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
     </motion.div>
